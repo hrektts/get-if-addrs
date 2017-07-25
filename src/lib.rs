@@ -13,6 +13,11 @@ use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 use c_linked_list::CLinkedList;
 
 /// Details about a network interface on the local system.
+///
+/// This `struct` is created by the [`get_if_addrs`] function.
+/// See its documentation for more.
+///
+/// [`get_if_addrs`]: fn.get_if_addrs.html
 #[derive(Clone, Debug, Eq, PartialEq, Hash)]
 pub struct Interface {
     /// The name of this interface.
@@ -48,7 +53,7 @@ impl Interface {
 
     /// Returns [`true`] if this interface has a loopback address.
     ///
-    /// [`true`]: ../../std/primitive.bool.html
+    /// [`true`]: https://doc.rust-lang.org/std/primitive.bool.html
     pub fn is_loopback(&self) -> bool {
         self.addr.is_loopback()
     }
@@ -192,7 +197,10 @@ impl TryInto<IpAddr> for CSockAddrPtr {
     }
 }
 
-/// Creates a vector of structures describing the network interfaces of the local system.
+/// Creates a vector of [`Interface`]. Interfaces which have link-local addresses are
+/// ignored.
+///
+/// [`Interface`]: struct.Interface.html
 pub fn get_if_addrs() -> Result<Vec<Interface>, io::Error> {
     let mut ifaddrs: *mut libc::ifaddrs;
     unsafe {
