@@ -210,7 +210,8 @@ pub fn get_if_addrs() -> Result<Vec<Interface>, io::Error> {
         }
     }
 
-    let addrs = unsafe { CLinkedList::from_mut_ptr(ifaddrs, |a| a.ifa_next) }
+    let addrs = CLinkedList::from_mut_ptr(ifaddrs, |a| a.ifa_next)
+        .unwrap()
         .iter()
         .filter_map(|ifaddr| TryFrom::try_from(ifaddr).ok())
         .collect::<Vec<_>>();
