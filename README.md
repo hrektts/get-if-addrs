@@ -20,3 +20,11 @@ Then add this to your crate:
 ``` rust
 extern crate get_if_addrs;
 ```
+
+## License
+
+`get-if-addrs` is primarily distributed under the terms of both the MIT license
+and the Apache License (Version 2.0), with portions covered by various BSD-like
+licenses.
+
+See LICENSE-APACHE, and LICENSE-MIT for details.
