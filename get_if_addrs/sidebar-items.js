@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["get_if_addrs","Creates a vector of [`Interface`]. Interfaces which have link-local addresses are ignored."]],"struct":[["Interface","Details about a network interface on the local system."]]});
