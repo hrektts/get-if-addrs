@@ -228,7 +228,7 @@ mod tests {
     #[test]
     fn c_sock_addr_ptr_to_ipv4addr() {
         use super::CSockAddrPtr;
-        use std::{io, mem};
+        use std::mem;
         use std::convert::TryInto;
         use std::net::IpAddr;
         use libc;
@@ -240,7 +240,7 @@ mod tests {
         };
         let sainptr: *const libc::sockaddr_in = &sain;
         let sa = &unsafe { *(sainptr as *const libc::sockaddr) };
-        let addr: Result<IpAddr, io::Error> = CSockAddrPtr(sa).try_into();
-        assert_eq!(addr.unwrap(), IpAddr::V4("127.0.0.1".parse().ok().unwrap()));
+        let addr: IpAddr = CSockAddrPtr(sa).try_into().unwrap();
+        assert_eq!(addr, IpAddr::V4("127.0.0.1".parse().ok().unwrap()));
     }
 }
